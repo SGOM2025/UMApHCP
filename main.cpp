@@ -20,28 +20,15 @@ int main()
     sprintf(aux, "inst%d.txt", INST);
     ler_dados(aux);
     //testar_dados("");
-    criar_solucao(s);
+    heu_cons_ale(s);
     calcular_fo(s);
     printf("\n\nSolucao inicial:");
     escrever_solucao(s);
-    //---
 
-	// UTILIZE ESSA �REA PARA TESTE
-
-    //---
     return 0;
 }
 
-//----------------------------------------------------------------------------------------------------------
-
-
-// INSIRA SEU C�DIGO AQUI
-
-
-//----------------------------------------------------------------------------------------------------------
-
-void criar_solucao(Solucao& s)
-{
+void heu_cons_ale(Solucao &s){
     int vet_aux[MAX_NOS];
     for (int i = 0; i < num_nos; i++)
         vet_aux[i] = i;
