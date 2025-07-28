@@ -67,6 +67,6 @@ Todas recebem a solução por referência e têm retorno `void`.
 Para compilar o código (em C++):
 
 ```bash
-g++ nome_sobrenome.cpp -o umah
+g++ main.cpp -o umah
 ./umah instancia.txt
 ```
