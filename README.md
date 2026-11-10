@@ -43,9 +43,21 @@ Cada instância tem o seguinte formato:
 
 ## 🧠 Heurísticas Implementadas
 
-- `busca_local_rand(Solucao &s)` – Busca local randômica
-- `busca_local_primeira_melhora(Solucao &s)` – Primeira melhora
-- `busca_local_melhor_melhora(Solucao &s)` – Melhor melhora
+A solução é representada por um vetor `vet_sol` em que as `p` primeiras posições são os hubs e as demais são os nós não-hubs.
+
+### Construtivas
+
+- `heu_cons_ale(Solucao &s)` – Aleatória: embaralha os nós e os `p` primeiros viram hubs
+- `heu_cons_gul(Solucao &s)` – Gulosa: adiciona um hub por vez, sempre o que resulta na menor FO parcial
+- `heu_cons_ale_gul(Solucao &s, const double& percentual)` – Aleatória gulosa: a cada passo, sorteia o hub entre os `percentual` (0 a 1) melhores candidatos
+
+### Refinamento (buscas locais)
+
+Vizinhança: troca de um hub por um nó não-hub.
+
+- `heu_BL_rand(Solucao& s, const int& iter)` – Busca local randômica: gera `iter` vizinhos aleatórios e aceita apenas os que melhoram a FO
+- `heu_BL_MM(Solucao& s)` – Melhor melhora: avalia toda a vizinhança e aplica o melhor movimento, até não haver melhora
+- `heu_BL_PM(Solucao& s)` – Primeira melhora: aplica o primeiro movimento que melhora a FO, até não haver melhora
 
 Todas recebem a solução por referência e têm retorno `void`.
 
@@ -67,6 +79,8 @@ Todas recebem a solução por referência e têm retorno `void`.
 Para compilar o código (em C++):
 
 ```bash
-g++ main.cpp -o umah
-./umah instancia.txt
+g++ -O2 main.cpp -o umah
+./umah inst1.txt
 ```
+
+Se nenhum arquivo for passado, é usada a instância definida pela constante `INST` em `main.cpp`. O programa executa as três construtivas e, a partir da mesma solução aleatória, as três buscas locais, exibindo a FO, os hubs e o tempo de cada uma.
